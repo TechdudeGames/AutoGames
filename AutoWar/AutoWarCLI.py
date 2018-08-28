@@ -5,7 +5,7 @@ term = Terminal()
 import os
 import sys
 import time
-import War
+import WarBackend as War
 import multiprocessing
 os.system("clear")
 starttime=time.time()
