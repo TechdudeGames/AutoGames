@@ -7,8 +7,8 @@ import os
 import sys
 import time
 term = Terminal()
-global printoutput
-printoutput = True
+global needscreenclear
+needscreenclear = False
 os.system("clear")
 starttime=time.time() #Statement to allow time to be kept on the amount of time the program has been running.
 #Todo add some terminal configuring options
@@ -55,15 +55,14 @@ def totalup(statlist,dataindex,numbcores):
 	return returnresult
 
 def clearscreen(key):
+	global needscreenclear
 	"""
 	:param key
 	Clear the screen of any entered garbage
 	:return: Nothing really
 	"""
 	if key == Key.esc:
-		printoutput = False
-		os.system("clear")
-	time.sleep(1)
+		needscreenclear = True
 
 
 #Creating the thread list and spawning the threads
@@ -81,31 +80,35 @@ else:
 #Main Event
 last_run = False
 with keyboard.Listener(on_press=clearscreen) as listener:
-	if pauseoutput: #This is needed because otherwise while the screen is being clear these print statements can get jacked up
 		while totalup(rtstatlist, 3, avcores) != number_of_total_games // avcores * avcores:
 			statlist = [totalup(rtstatlist, 0, avcores), totalup(rtstatlist, 1, avcores),
 						totalup(rtstatlist, 2, avcores),
 						totalup(rtstatlist, 3, avcores)]
 			#Minimizes a bug from occuring if a thread modified the rtstatlist before the print code finshed processing the first totalup
-			if totalup(rtstatlist, 3,
-					   avcores) != 0:  # Prevents divide by zero error if the display code was run before any of the threads had a chance to play a game
-				with term.location(0, 10):
-					print("Player One has won %f percent of the time	   " % float(statlist[0] * 100 / statlist[3]))
-					print("Player Two has won %f percent of the time	   " % float(statlist[1] * 100 / statlist[3]))
-					print("There has been a draw %f percent of the time	 \n" % float(statlist[2] / statlist[3]))
-					print("Player One has won %i times" % statlist[0])
-					print("Player Two has won %i times" % statlist[1])
-					print("There have been %i draws" % statlist[2])
-					print("The game has been played %i times" % statlist[3])
-					elapsted_seconds = time.time() - starttime
-					# elapsted_seconds = 602263 #Debug time amount. Should be 6 days, 23 hours, 17 minutes, and 43 seconds
-					days = int(elapsted_seconds // 86400)
-					hours = int(elapsted_seconds // 3600 - (days * 24))
-					minutes = int(elapsted_seconds // 60 - (hours * 60) - (days * 1440))
-					seconds = int(elapsted_seconds - (minutes * 60) - (hours * 3600) - (days * 86400))
-					print("Time Elapsed: ", days, ":", hours, ":", minutes, ":", seconds)
+			if statlist[0] > 0:  # Prevents divide by zero error if the display code was run before any of the threads had a chance to play a game
+				if needscreenclear:
+					os.system("clear")
+					needscreenclear = False
+				else:
+					with term.location(0, 5):
+						print(
+							"Player One has won %f percent of the time	   " % float(statlist[0] * 100 / statlist[3]))
+						print(
+							"Player Two has won %f percent of the time	   " % float(statlist[1] * 100 / statlist[3]))
+						print("There has been a draw %f percent of the time	 \n" % float(statlist[2] / statlist[3]))
+						print("Player One has won %i times" % statlist[0])
+						print("Player Two has won %i times" % statlist[1])
+						print("There have been %i draws" % statlist[2])
+						print("The game has been played %i times" % statlist[3])
+						elapsted_seconds = time.time() - starttime
+						# elapsted_seconds = 602263 #Debug time amount. Should be 6 days, 23 hours, 17 minutes, and 43 seconds
+						days = int(elapsted_seconds // 86400)
+						hours = int(elapsted_seconds // 3600 - (days * 24))
+						minutes = int(elapsted_seconds // 60 - (hours * 60) - (days * 1440))
+						seconds = int(elapsted_seconds - (minutes * 60) - (hours * 3600) - (days * 86400))
+						print("Time Elapsed: ", days, ":", hours, ":", minutes, ":", seconds)
 		os.system("clear")
-
+time.sleep(1) #Waiting a bit
 with term.location(0, 10):
 	print("Player One has won %f percent of the time	   " % float(statlist[0] * 100 / statlist[3]))
 	print("Player Two has won %f percent of the time	   " % float(statlist[1] * 100 / statlist[3]))
