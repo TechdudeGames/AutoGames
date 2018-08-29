@@ -1,9 +1,0 @@
-There has been a draw %f percent of the time.	 
-clearThread %i onlineresultplaywarThere have been %i drawsnumgamesProcessneedscreenclearargsTime Remaining: rtstatlist
-	:param key
-	Clear the screen of any entered garbage
-	:return: Nothing really
-	advdayslistenerPress Esc to clear the screen (Just in case you accidentally typed garbage)numberoflistsoutputstlistdivesubdiveosPlayer Two has won %f percent of the time.	   NoneArraytremainingterm__annotations__startminutesPlayer One has won %i time(s).Listenerblessings__debug__Keyon_press__len__kountloopsTerminalhoursavcores
-	:param statlist: The current real time statistic list
-	:return: A list of totaled data from this rt list
-	secondspynputnumber_of_total_gamesesc/home/techdude/PycharmProjects/AutoGames/AutoWar/AutoWarCLI.pytotalupappendWarBackendPlayer Two has won %i times.The game has been played %i time(s)Time Elapsed: threadsFalseadvsecondselapsted_secondsclearscreencountPlayer One has won %i times.cpu_countkeyboardThe game has been played %i time(s).locationstarttimemultiprocessingsystemPlayer Two has won %i time(s).last_runpynput.keyboardPlaying %i games.advminutesthreadnumwarthreadWe are %f percent done.targetadvhours<module>wthreadPlayer One has won %f percent of the time.	   adverage_games_per_secondintsumfileiternameopenreprsendsitebytescloselevelprintrangethrowtypesformatlocals__all____cmp____doc__compileglobalsinspect__dict____exit____file____iter____main____name____path____spec__fromlist__class____enter__bytearray__cached____import____loader____module____package__classmethod__builtins__staticmethod__metaclass__/usr/bin/python3
