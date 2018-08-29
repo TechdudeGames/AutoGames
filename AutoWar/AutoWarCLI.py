@@ -13,7 +13,7 @@ os.system("clear")
 starttime=time.time() #Statement to allow time to be kept on the amount of time the program has been running.
 #Todo add some terminal configuring options
 avcores = multiprocessing.cpu_count() - 1
-number_of_total_games= 30000 # 33 million
+number_of_total_games= 33000000 # 33 million
 print("Playing %i games." %(number_of_total_games//avcores * avcores))
 
 rtstatlist = []
