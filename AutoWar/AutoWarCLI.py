@@ -108,7 +108,9 @@ with keyboard.Listener(on_press=clearscreen) as listener:
 						seconds = int(elapsted_seconds - (minutes * 60) - (hours * 3600) - (days * 86400))
 						print("Time Elapsed: ", days, ":", hours, ":", minutes, ":", seconds)
 		os.system("clear")
-time.sleep(1) #Waiting a bit
+statlist = [totalup(rtstatlist, 0, avcores), totalup(rtstatlist, 1, avcores),
+            totalup(rtstatlist, 2, avcores),
+            totalup(rtstatlist, 3, avcores)]
 with term.location(0, 10):
 	print("Player One has won %f percent of the time	   " % float(statlist[0] * 100 / statlist[3]))
 	print("Player Two has won %f percent of the time	   " % float(statlist[1] * 100 / statlist[3]))
