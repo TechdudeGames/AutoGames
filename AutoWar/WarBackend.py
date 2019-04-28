@@ -1,4 +1,7 @@
+import csv
 import random
+
+
 class card2():
 	worth = 2
 	kind=2
@@ -40,7 +43,12 @@ class cardace():
 	kind="Ace"
 cardtypes=[card2,card3,card4,card5,card6,card7,card8,card9,card10,cardjack,cardqueen,cardking,cardace]
 
-def playwar():
+def playwar(fileoutput="report.csv"):
+	#We are going to make a CSV containing all the
+
+
+
+
 	tmp_deck = []
 	for i in cardtypes:
 		for l in range(0, 4):
@@ -111,6 +119,25 @@ def playwar():
 						playertwo.insert(0, p2c)
 						for card in cardpot:
 							playertwo.insert(0, card)
+
+	# CSV Writing
+	csvwriteonly = open(fileoutput, 'a')
+	data = []
+	namedeck = []
+	for name in shuffled_deck:
+		namedeck.append(name.kind)
+	data.append(namedeck)
+	data.append(namedeck[0:int(len(namedeck) / 2)])
+	data.append(namedeck[int(len(namedeck) / 2):])
+	if (playerone.__len__() == 0 and cancontinue == True) or p1wins:
+		data.append("Player 1")
+	elif playertwo.__len__() == 0  and cancontinue == True or p2wins:
+		data.append("Player 2")
+	elif draws:
+		data.append("DRAW")
+	csvwriter = csv.writer(csvwriteonly)
+	csvwriter.writerow(data)
+	csvwriteonly.close()
 
 	if (playerone.__len__() == 0 and cancontinue == True) or p1wins:
 		return 1 #Player one won
